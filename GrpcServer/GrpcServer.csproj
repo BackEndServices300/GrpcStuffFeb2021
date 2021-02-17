@@ -6,11 +6,13 @@
 
   <ItemGroup>
     <None Remove="Protos\orderProcessor.proto" />
+    <None Remove="Protos\turnByTurn.proto" />
   </ItemGroup>
 
   <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\orderProcessor.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\turnByTurn.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

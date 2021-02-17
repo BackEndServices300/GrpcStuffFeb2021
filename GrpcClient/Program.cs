@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf.Collections;
+using Grpc.Core;
 using Grpc.Net.Client;
 using GrpcServer;
 using System;
@@ -35,8 +36,19 @@ namespace GrpcClient
             Console.WriteLine("Sending your order...");
             var orderResponse = await orderProcessorClient.ProcessAsync(requestOrder);
             Console.WriteLine($"Got the response - { orderResponse.PickupTime.ToDateTime()}");
-            
 
+            Console.WriteLine("About to do the turn by turn thing...");
+            Console.ReadLine();
+
+            var turnByTurnClient = new TurnByTurn.TurnByTurnClient(channel);
+
+            var streamingResponse = turnByTurnClient.StartGuidance(new GuidanceRequest { Address = "506 Vaughn" });
+
+            await foreach(var step in streamingResponse.ResponseStream.ReadAllAsync())
+            {
+                Console.WriteLine($"Next Step: Turn {step.Direction} at {step.Road}");
+            }
+            Console.WriteLine("You have arrived at your destination!");
         }
     }
 }

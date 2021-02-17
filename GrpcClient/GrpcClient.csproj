@@ -21,6 +21,9 @@
     <Protobuf Include="..\GrpcServer\Protos\orderProcessor.proto" GrpcServices="Client">
       <Link>Protos\orderProcessor.proto</Link>
     </Protobuf>
+    <Protobuf Include="..\GrpcServer\Protos\turnByTurn.proto" GrpcServices="Client">
+      <Link>Protos\turnByTurn.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

@@ -34,6 +34,7 @@ namespace GrpcServer
             {
                 endpoints.MapGrpcService<GreeterService>();
                 endpoints.MapGrpcService<ProcessOrderService>();
+                endpoints.MapGrpcService<TurnByTurnService>();
 
                 endpoints.MapGet("/", async context =>
                 {
