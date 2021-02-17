@@ -25,7 +25,7 @@ namespace GrpcServer.Services
                 await Task.Delay(1000);
                 _logger.LogInformation($"Proccessing item {item} of order {request.Id}");
             }
-            return new OrderResponse { Id = request.Id, PickupTime = Timestamp.FromDateTime(DateTime.Now) };
+            return new OrderResponse { Id = request.Id, PickupTime = Timestamp.FromDateTime(DateTime.Now.ToUniversalTime()) };
         }
     }
 }

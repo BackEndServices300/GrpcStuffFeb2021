@@ -1,4 +1,5 @@
-﻿using Grpc.Net.Client;
+﻿using Google.Protobuf.Collections;
+using Grpc.Net.Client;
 using GrpcServer;
 using System;
 
@@ -24,6 +25,18 @@ namespace GrpcClient
 
             Console.WriteLine($"The Service Said: {reply.Message}");
             Console.ReadLine();
+
+            var orderProcessorClient = new ProcessOrder.ProcessOrderClient(channel);
+
+            var requestOrder = new Order { 
+                Id = "1"
+            };
+            requestOrder.Items.AddRange(new string[] { "1", "2", "3", "5", "10" });
+            Console.WriteLine("Sending your order...");
+            var orderResponse = await orderProcessorClient.ProcessAsync(requestOrder);
+            Console.WriteLine($"Got the response - { orderResponse.PickupTime.ToDateTime()}");
+            
+
         }
     }
 }
